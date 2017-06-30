@@ -1,0 +1,33 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectBook } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
+class BookList extends Component {
+  renderList() {
+    return this.props.books.map((book) => {
+      return (
+        <li key={book.title} className="list-group-item">{book.title}</li>
+      );
+    })
+  }
+
+  render() {
+    return (
+      <ul className="list-group col-sm-4">
+        {this.renderList()}
+      </ul>
+    )
+  }
+}
+
+function mapStateToProps(state) {
+  // Whatever gets passed into state
+  // Is mapped to this.props inside of BookList
+  return {
+    books: state.books
+  };
+}
+
+// This create the "container" by wiring together "connecting" Redux State and React Class
+export default connect(mapStateToProps)(BookList);
