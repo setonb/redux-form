@@ -24,7 +24,11 @@ class PostsNew extends Component {
   }
 
   onSubmit(values) {
-    this.props.createPost(values);
+    // Pass two values into the Action Creator
+    // Second one will be a callback function for after the first request completes
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
